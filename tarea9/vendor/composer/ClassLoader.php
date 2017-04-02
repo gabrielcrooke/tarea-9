@@ -1,45 +1,10 @@
 <?php
 
-/*
- * This file is part of Composer.
- *
- * (c) Nils Adermann <naderman@naderman.de>
- *     Jordi Boggiano <j.boggiano@seld.be>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+
 
 namespace Composer\Autoload;
 
-/**
- * ClassLoader implements a PSR-0, PSR-4 and classmap class loader.
- *
- *     $loader = new \Composer\Autoload\ClassLoader();
- *
- *     // register classes with namespaces
- *     $loader->add('Symfony\Component', __DIR__.'/component');
- *     $loader->add('Symfony',           __DIR__.'/framework');
- *
- *     // activate the autoloader
- *     $loader->register();
- *
- *     // to enable searching the include path (eg. for PEAR packages)
- *     $loader->setUseIncludePath(true);
- *
- * In this example, if you try to use a class in the Symfony\Component
- * namespace or one of its children (Symfony\Component\Console for instance),
- * the autoloader will first look for the class under the component/
- * directory, and it will then fallback to the framework/ directory if not
- * found before giving up.
- *
- * This class is loosely based on the Symfony UniversalClassLoader.
- *
- * @author Fabien Potencier <fabien@symfony.com>
- * @author Jordi Boggiano <j.boggiano@seld.be>
- * @see    http://www.php-fig.org/psr/psr-0/
- * @see    http://www.php-fig.org/psr/psr-4/
- */
+
 class ClassLoader
 {
     // PSR-4
@@ -98,14 +63,7 @@ class ClassLoader
         }
     }
 
-    /**
-     * Registers a set of PSR-0 directories for a given prefix, either
-     * appending or prepending to the ones previously set for this prefix.
-     *
-     * @param string       $prefix  The prefix
-     * @param array|string $paths   The PSR-0 root directories
-     * @param bool         $prepend Whether to prepend the directories
-     */
+    
     public function add($prefix, $paths, $prepend = false)
     {
         if (!$prefix) {
@@ -143,16 +101,7 @@ class ClassLoader
         }
     }
 
-    /**
-     * Registers a set of PSR-4 directories for a given namespace, either
-     * appending or prepending to the ones previously set for this namespace.
-     *
-     * @param string       $prefix  The prefix/namespace, with trailing '\\'
-     * @param array|string $paths   The PSR-4 base directories
-     * @param bool         $prepend Whether to prepend the directories
-     *
-     * @throws \InvalidArgumentException
-     */
+    
     public function addPsr4($prefix, $paths, $prepend = false)
     {
         if (!$prefix) {
@@ -191,13 +140,7 @@ class ClassLoader
         }
     }
 
-    /**
-     * Registers a set of PSR-0 directories for a given prefix,
-     * replacing any others previously set for this prefix.
-     *
-     * @param string       $prefix The prefix
-     * @param array|string $paths  The PSR-0 base directories
-     */
+    
     public function set($prefix, $paths)
     {
         if (!$prefix) {
@@ -207,15 +150,7 @@ class ClassLoader
         }
     }
 
-    /**
-     * Registers a set of PSR-4 directories for a given namespace,
-     * replacing any others previously set for this namespace.
-     *
-     * @param string       $prefix The prefix/namespace, with trailing '\\'
-     * @param array|string $paths  The PSR-4 base directories
-     *
-     * @throws \InvalidArgumentException
-     */
+   
     public function setPsr4($prefix, $paths)
     {
         if (!$prefix) {
@@ -230,92 +165,55 @@ class ClassLoader
         }
     }
 
-    /**
-     * Turns on searching the include path for class files.
-     *
-     * @param bool $useIncludePath
-     */
+    
     public function setUseIncludePath($useIncludePath)
     {
         $this->useIncludePath = $useIncludePath;
     }
 
-    /**
-     * Can be used to check if the autoloader uses the include path to check
-     * for classes.
-     *
-     * @return bool
-     */
+    
     public function getUseIncludePath()
     {
         return $this->useIncludePath;
     }
 
-    /**
-     * Turns off searching the prefix and fallback directories for classes
-     * that have not been registered with the class map.
-     *
-     * @param bool $classMapAuthoritative
-     */
+   
     public function setClassMapAuthoritative($classMapAuthoritative)
     {
         $this->classMapAuthoritative = $classMapAuthoritative;
     }
 
-    /**
-     * Should class lookup fail if not found in the current class map?
-     *
-     * @return bool
-     */
+   
     public function isClassMapAuthoritative()
     {
         return $this->classMapAuthoritative;
     }
 
-    /**
-     * APCu prefix to use to cache found/not-found classes, if the extension is enabled.
-     *
-     * @param string|null $apcuPrefix
-     */
+    
     public function setApcuPrefix($apcuPrefix)
     {
         $this->apcuPrefix = function_exists('apcu_fetch') && ini_get('apc.enabled') ? $apcuPrefix : null;
     }
 
-    /**
-     * The APCu prefix in use, or null if APCu caching is not enabled.
-     *
-     * @return string|null
-     */
+    
     public function getApcuPrefix()
     {
         return $this->apcuPrefix;
     }
 
-    /**
-     * Registers this instance as an autoloader.
-     *
-     * @param bool $prepend Whether to prepend the autoloader or not
-     */
+    
     public function register($prepend = false)
     {
         spl_autoload_register(array($this, 'loadClass'), true, $prepend);
     }
 
-    /**
-     * Unregisters this instance as an autoloader.
-     */
+   
     public function unregister()
     {
         spl_autoload_unregister(array($this, 'loadClass'));
     }
 
-    /**
-     * Loads the given class or interface.
-     *
-     * @param  string    $class The name of the class
-     * @return bool|null True if loaded, null otherwise
-     */
+   
     public function loadClass($class)
     {
         if ($file = $this->findFile($class)) {
@@ -325,13 +223,7 @@ class ClassLoader
         }
     }
 
-    /**
-     * Finds the path to the file where the class is defined.
-     *
-     * @param string $class The name of the class
-     *
-     * @return string|false The path if found, false otherwise
-     */
+   
     public function findFile($class)
     {
         // class map lookup
@@ -434,11 +326,7 @@ class ClassLoader
     }
 }
 
-/**
- * Scope isolated include.
- *
- * Prevents access to $this/self from included files.
- */
+
 function includeFile($file)
 {
     include $file;
