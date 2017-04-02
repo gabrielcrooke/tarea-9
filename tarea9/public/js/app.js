@@ -1,14 +1,14 @@
-// function of the user for login with ajax
+
 function log_In()
 {
   response;
 
    $("#frmLog_In").submit(function(event)
    {
-      // stop the normal actions of form
+      
       event.preventDefault();
 
-        // complete the process with ajax
+        
         $.ajax({
           url: 'users/logIn',
           type: 'POST',
@@ -18,13 +18,13 @@ function log_In()
         {
           if (r == 1)
           {
-            // this just in case the user have shit of internet
+            
             response = '<div class="alert alert-dismissible alert-success">';
             response += '<p><strong>ERROR</strong> Conectado!!!!...</p>';
             response += '</div>';
             $("#response").html(response);
 
-            // reload the page
+          
             location.reload(true);
           }
 
@@ -43,10 +43,10 @@ function sign_In()
 
    $("#frmSign_In").submit(function(event)
    {
-      // stop the normal actions of form
+      
       event.preventDefault();
 
-          // complete the process with ajax
+          
           $.ajax({
             url: 'users/signIn',
             type: 'POST',
@@ -57,7 +57,7 @@ function sign_In()
 
             if (r == 1)
             {
-              // this just in case the user have shit of internet
+            
               response = '<div class="alert alert-dismissible alert-success">';
               response += '<p><strong>ERROR</strong> Conectado!!!!...</p>';
               response += '</div>';
@@ -65,8 +65,7 @@ function sign_In()
               console.log('did it');
               $("#responseR").html(response);
 
-              // reload the page
-              // location.reload();
+              
             }
 
             else
@@ -78,7 +77,7 @@ function sign_In()
    });
 }
 
-//for log out the user
+
 function logOut()
 {
   $.ajax({
@@ -88,7 +87,7 @@ function logOut()
   })
   .done(function(r)
   {
-    // reload the connection
+    
     location.reload();
   });
 }
